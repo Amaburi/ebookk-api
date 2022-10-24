@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\cobasatu;
+use App\Http\Controllers\siswacontroller;
+use App\Http\Controllers\bookcontroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\FlareClient\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +18,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Route::get('nama',function(){
+//     return["me" => "Jy"];
+// });
+// Route::get('siswaregis', function () {
+//     return view('siswaregis');
+// });
+
+Route::post('siswa/add',[siswacontroller::class,'store']);
+Route::get('siswa/show',[siswacontroller::class,'index']);
+Route::put('siswa/{id}/update',[siswacontroller::class,'update']);
+Route::delete('siswa/{id}/delete',[siswacontroller::class,'destroy']);
+
+Route::post('book/add',[bookcontroller::class,'store']);
+Route::get('book/show',[bookcontroller::class,'index']);
+Route::put('book/{id}/update',[bookcontroller::class,'update']);
+Route::delete('book/{id}/delete',[bookcontroller::class,'destroy']);
+
+// Route::get('cobasatu', [cobasatu::class, 'index']);
+Route::resource('cobasatu', cobasatu::class);
+Route::resource('siswacontroller', siswacontroller::class);
